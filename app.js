@@ -1,4 +1,3 @@
-//jshint esversion:6
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -14,6 +13,7 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+const posts = [];
 
 app.get('/', function (req, res) {
   res.render('home', { homeStartingContent: homeStartingContent })
@@ -36,18 +36,10 @@ app.post('/compose', function (req, res) {
     title: req.body.postTitle,
     body: req.body.postBody,
   }
-  console.log(post)
+  posts.push(post)
+  console.log(posts)
+  res.redirect('/')
 })
-
-
-
-
-
-
-
-
-
-
 
 port = process.env.PORT || 3000
 app.listen(port, function () {
