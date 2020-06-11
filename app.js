@@ -20,6 +20,10 @@ app.get('/', function (req, res) {
   res.render('home', { homeStartingContent: homeStartingContent, posts: posts })
 })
 
+app.get('/posts/:postID', function (req, res) {
+  console.log(req.params.postID)
+})
+
 app.get('/about', function (req, res) {
   res.render('about', { aboutContent: aboutContent })
 })
