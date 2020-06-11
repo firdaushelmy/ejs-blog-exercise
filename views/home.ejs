@@ -4,4 +4,13 @@
 
 <p><%= homeStartingContent %></p>
 
+<p>
+
+
+  <% if (postStringify === 0) {  %>
+<h1> No More post yet! </h1>
+<% } else { %>
+<h1> <%-  postStringify %> </h1>}
+</p>
+
 <%- include('partials/footer') -%>

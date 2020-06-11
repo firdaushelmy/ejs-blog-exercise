@@ -14,9 +14,10 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 const posts = [];
+const postStringify = JSON.stringify(posts);
 
 app.get('/', function (req, res) {
-  res.render('home', { homeStartingContent: homeStartingContent })
+  res.render('home', { homeStartingContent: homeStartingContent, postStringify: postStringify })
 })
 
 app.get('/about', function (req, res) {
@@ -36,9 +37,8 @@ app.post('/compose', function (req, res) {
     title: req.body.postTitle,
     body: req.body.postBody,
   }
-  posts.push(post)
-  console.log(posts)
-  res.redirect('/')
+  posts.push(post);
+  res.redirect('/');
 })
 
 port = process.env.PORT || 3000
