@@ -14,14 +14,18 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 const posts = [];
-const postStringify = JSON.stringify(posts);
+// const postStringify = JSON.stringify(posts);
 
 app.get('/', function (req, res) {
   res.render('home', { homeStartingContent: homeStartingContent, posts: posts })
 })
 
 app.get('/posts/:postID', function (req, res) {
-  console.log(req.params.postID)
+  if (req.params.PostID === posts.title) {
+    console.log('Match Found!')
+  } else {
+    console.log('FAIL')
+  }
 })
 
 app.get('/about', function (req, res) {
