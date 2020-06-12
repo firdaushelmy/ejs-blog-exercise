@@ -30,7 +30,7 @@ app.get('/posts/:postID', function (req, res) {
     if (_.lowerCase(req.params.postID) === _.lowerCase(postTitleLowerCase)) {
       res.render('post', { postTitleLowerCase: postTitleLowerCase, postBody: postBody });
     } else {
-      console.log('FAIL');
+      console.log('Error 404')
     }
   });
 
