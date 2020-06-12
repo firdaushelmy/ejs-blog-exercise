@@ -25,8 +25,10 @@ app.get('/', function (req, res) {
 
 app.get('/posts/:postID', function (req, res) {
   posts.forEach(function (post) {
-    if (_.lowerCase(req.params.postID) === _.lowerCase(post.title)) {
-      console.log('Match Found!');
+    const postTitleLowerCase = post.title
+    const postBody = post.body
+    if (_.lowerCase(req.params.postID) === _.lowerCase(postTitleLowerCase)) {
+      res.render('post', { postTitleLowerCase: postTitleLowerCase, postBody: postBody });
     } else {
       console.log('FAIL');
     }
