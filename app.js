@@ -24,6 +24,21 @@ const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rho
 
 const posts = [];
 
+const postsSchema = new item({
+  post: {
+    type: String,
+    required = true,
+  },
+});
+
+const listsSchema = {
+  name = String,
+  posts =[postsSchema],
+}
+
+const Post = mongoose.model('post', postsSchema);
+const List = mongoose.model('list', listsSchema);
+
 app.get('/', function (req, res) {
   res.render('home', { homeStartingContent: homeStartingContent, posts: posts })
 })
