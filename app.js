@@ -44,15 +44,18 @@ app.get('/', function (req, res) {
 })
 
 app.get('/posts/:postID', function (req, res) {
-  posts.forEach(function (post) {
-    const postTitleLowerCase = post.title
-    const postBody = post.body
-    if (_.lowerCase(req.params.postID) === _.lowerCase(postTitleLowerCase)) {
-      res.render('post', { postTitleLowerCase: postTitleLowerCase, postBody: postBody });
-    }
-  });
 
+  List.findOne({ name: postID }, function (err, foundList) {
+    if (!err) {
+      if (_.lowerCase(req.params.postID) === _.lowerCase(postTitleLowerCase)) {
+        res.render('post', { postTitleLowerCase: foundList.title, postBody: foundList.content });
+      }
+    } else {
+      res.redirect('/')
+    }
+  })
 })
+
 
 app.get('/about', function (req, res) {
   res.render('about', { aboutContent: aboutContent })
