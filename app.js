@@ -42,7 +42,10 @@ const Post = mongoose.model('post', postsSchema);
 const List = mongoose.model('list', listsSchema);
 
 app.get('/', function (req, res) {
-  res.render('home', { homeStartingContent: homeStartingContent, posts: posts })
+  Post.find({}, function (err, posts) {
+    res.render('home', { homeStartingContent: homeStartingContent, posts: posts })
+  })
+
 })
 
 app.get('/posts/:postID', function (req, res) {
