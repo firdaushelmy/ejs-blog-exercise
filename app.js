@@ -74,33 +74,12 @@ app.get('/compose', function (req, res) {
 // stopped here because i dont know why this is not working
 // try out to dolist on localhost
 app.post('/compose', function (req, res) {
-  // const post = {
-  //   title: req.body.postTitle,
-  //   body: req.body.postBody,
-  // }
-  // posts.push(post);
-  // res.redirect('/');
-
-  List.findOne({ name: 'BlogMongo' }, function (err, foundMongo) {
-    // if (!foundMongo) {
-    //   const list = new list({
-    //     name: 'BlogMongo'
-    //   })
-    //   list.save()
-    //   res.redirect('/compose');
-    // } else {
-
-    if (foundMongo) {
-      const post = new post({
-        title: req.body.postTitle,
-        content: req.body.postBody,
-      });
-      List.posts.push(post)
-      post.save();
-      res.redirect('/compose')
-    }
-    // }
-  })
+  const post = new Post({
+    title: req.body.postTitle,
+    content: req.body.postBody,
+  });
+  post.save();
+  res.redirect('/compose')
 })
 
 port = process.env.PORT || 3000
