@@ -50,9 +50,9 @@ app.get('/', function (req, res) {
 
 app.get('/posts/:postID', function (req, res) {
 
-  List.findOne({ name: postID }, function (err, foundList) {
+  Post.find({}, function (err, foundList) {
     if (!err) {
-      if (_.lowerCase(req.params.postID) === _.lowerCase(postTitleLowerCase)) {
+      if (_.lowerCase(req.params.postID) === _.lowerCase(foundList.title)) {
         res.render('post', { postTitleLowerCase: foundList.title, postBody: foundList.content });
       }
     } else {
@@ -60,7 +60,6 @@ app.get('/posts/:postID', function (req, res) {
     }
   })
 })
-
 
 app.get('/about', function (req, res) {
   res.render('about', { aboutContent: aboutContent })
@@ -81,8 +80,11 @@ app.post('/compose', function (req, res) {
     title: req.body.postTitle,
     content: req.body.postBody,
   });
-  post.save();
-  res.redirect('/compose')
+  post.save(function (err) {
+    if (!err) {
+      res.redirect('/')
+    };
+  })
 })
 
 port = process.env.PORT || 3000
