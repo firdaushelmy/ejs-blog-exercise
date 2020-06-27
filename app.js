@@ -48,15 +48,12 @@ app.get('/', function (req, res) {
 
 })
 
-app.get('/posts/:postID', function (req, res) {
+app.get('/posts/:postId', function (req, res) {
 
-  Post.find({}, function (err, foundList) {
+  const postId = req.params.postId
+  Post.findOne({ _id: postId }, function (err, post) {
     if (!err) {
-      if (_.lowerCase(req.params.postID) === _.lowerCase(foundList.title)) {
-        res.render('post', { postTitleLowerCase: foundList.title, postBody: foundList.content });
-      }
-    } else {
-      res.redirect('/')
+      res.render('post', { title: post.title, content: post.content });
     }
   })
 })
